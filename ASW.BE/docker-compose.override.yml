@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  webclient:
+    build:
+      context: ../ASW.FE
+      dockerfile: Dockerfile
+    depends_on:
+      - asw.sm.core.api
+    ports:
+      - "4200:80"
+    networks:
+      - LocalDockerNetwork
+
+  asw.sm.core.api:
+    ports:
+      - "20001:20001"
+    networks:
+      - LocalDockerNetwork
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro

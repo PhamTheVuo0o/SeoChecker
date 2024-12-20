@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  webclient:
+    build:
+      context: ../ASW.FE
+      dockerfile: Dockerfile
+    ports:
+      - "4200:80"
+    networks:
+      - LocalDockerNetwork
+  
+  asw.sm.core.api:
+    image: ${DOCKER_REGISTRY-}asw.sm.core.api
+    build:
+      context: .
+      dockerfile: Services/Core/ASW.SM.Core.API/Dockerfile
+
+networks:
+  LocalDockerNetwork:
+      driver: bridge
